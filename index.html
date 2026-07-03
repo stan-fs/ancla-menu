@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Ancla del Sabor – Menú Digital</title>
+<style>
+:root{
+  --navy:#0d2240;--navy-light:#163459;--navy-dark:#081628;
+  --orange:#e8622a;--orange-light:#f07a44;
+  --gold:#c9a84c;--gold-light:#e4c76b;
+  --cream:#fdf8f3;--text:#1a1a1a;--text-light:#555;
+  --card-shadow:0 4px 18px rgba(13,34,64,0.13);
+  --transition:0.22s cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--cream);color:var(--text)}
+
+/* HEADER */
+.site-header{background:linear-gradient(160deg,#0a1a30 0%,#0d2240 50%,#0f2850 100%);padding:52px 20px 44px;text-align:center;position:relative;overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(232,98,42,0.12) 0%,transparent 70%);pointer-events:none}
+.header-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.header-inner img{height:200px;width:auto;filter:drop-shadow(0 6px 24px rgba(232,98,42,0.35));transition:transform var(--transition)}
+.header-inner img:hover{transform:scale(1.04)}
+.header-tagline{font-size:1rem;color:#a8c4e0;font-style:italic;letter-spacing:4px;text-transform:uppercase;font-weight:300;margin-top:10px}
+.header-divider{width:80px;height:3px;background:var(--orange);margin:14px auto 0;border-radius:2px}
+
+/* NAV */
+.cat-nav{background:var(--navy-light);position:sticky;top:0;z-index:100;display:flex;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 10px rgba(0,0,0,0.25);border-bottom:3px solid var(--orange)}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:flex;min-width:max-content;margin:0 auto}
+.nav-link{color:#cde;text-decoration:none;padding:12px 18px;font-size:0.78rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:0.5px;line-height:1.2;display:flex;flex-direction:column;gap:2px;white-space:nowrap;flex-shrink:0;position:relative;transition:color var(--transition),background var(--transition);overflow:hidden}
+.nav-link::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:3px;background:var(--orange);transition:width var(--transition),left var(--transition)}
+.nav-link:hover::after{width:100%;left:0}
+.nav-link:hover{background:rgba(232,98,42,0.15);color:#fff}
+.nav-link.nav-feat{color:var(--gold-light);border-bottom:2px solid var(--gold)}
+.nav-link.nav-feat::after{background:var(--gold)}
+.nav-link.nav-feat:hover{background:rgba(201,168,76,0.15);color:var(--gold-light)}
+.nav-en{font-size:0.68rem;color:#88a8c0;font-weight:400;text-transform:none;font-style:italic;transition:color var(--transition)}
+.nav-link:hover .nav-en{color:#ffc}
+.nav-link.nav-feat .nav-en{color:#c9a84c}
+
+/* FEATURED SECTION */
+.feat-section{background:linear-gradient(135deg,#0a1628 0%,#0d2240 40%,#111c00 100%);padding:60px 20px 50px;position:relative;overflow:hidden}
+.feat-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.15) 0%,transparent 60%);pointer-events:none}
+.feat-section-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.feat-header{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.feat-title-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.feat-title{font-size:1.7rem;font-weight:800;color:var(--gold-light);text-transform:uppercase;letter-spacing:2px;text-align:center;white-space:nowrap}
+.feat-title-en{font-size:1rem;color:#a09070;font-weight:400;text-transform:none;letter-spacing:1px}
+.feat-subtitle{text-align:center;color:#a0b8a0;font-size:0.88rem;line-height:1.7;margin-bottom:36px}
+.feat-subtitle em{color:#808870}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.feat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.3);border-radius:16px;overflow:hidden;transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition);display:flex;flex-direction:column}
+.feat-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(201,168,76,0.25);border-color:rgba(201,168,76,0.6)}
+.feat-img-wrap{width:100%;height:280px;overflow:hidden;background:#0a1a2c}
+.feat-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform 0.4s ease}
+.feat-card:hover .feat-img-wrap img{transform:scale(1.06)}
+.feat-img-wrap.no-img{background:linear-gradient(135deg,#0a1a2c,#1a2a1c)}
+.feat-badge-row{display:flex;gap:8px;flex-wrap:wrap;padding:14px 16px 0}
+.feat-badge{background:var(--gold);color:#1a1000;font-size:0.72rem;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:0.5px}
+.dine-badge{background:rgba(232,98,42,0.2);color:var(--orange-light);font-size:0.68rem;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid rgba(232,98,42,0.4)}
+.feat-info{padding:16px 18px 20px;flex:1;display:flex;flex-direction:column;gap:10px}
+.feat-name{font-size:1.2rem;font-weight:800;color:var(--gold-light);line-height:1.2}
+.feat-desc{font-size:0.85rem;color:#8aaa8a;line-height:1.6;flex:1}
+.feat-price{display:inline-block;background:var(--gold);color:#1a1000;font-weight:800;font-size:1.1rem;padding:6px 18px;border-radius:24px;align-self:flex-start;margin-top:4px;transition:background var(--transition),transform var(--transition)}
+.feat-card:hover .feat-price{background:var(--gold-light);transform:scale(1.04)}
+
+/* REGULAR SECTIONS */
+.category-section{padding:48px 20px 32px;max-width:1200px;margin:0 auto}
+.category-header{margin-bottom:28px;border-left:5px solid var(--orange);padding-left:16px}
+.category-header h2{font-size:1.7rem;color:var(--navy);font-weight:800;text-transform:uppercase}
+.cat-en{font-size:0.95rem;color:var(--text-light);font-weight:400;text-transform:none;font-style:italic}
+.dish-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+
+/* DISH CARD */
+.dish-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--card-shadow);transition:transform var(--transition),box-shadow var(--transition);display:flex;flex-direction:column}
+.dish-card:hover{transform:translateY(-5px);box-shadow:0 10px 32px rgba(13,34,64,0.2)}
+.dish-img-wrap{width:100%;height:250px;overflow:hidden;background:#e8eef5;position:relative}
+.dish-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform 0.35s ease}
+.dish-card:hover .dish-img-wrap img{transform:scale(1.06)}
+.dish-img-wrap.no-img{background:linear-gradient(135deg,#c8d8e8,#a0b8cc)}
+.dish-info{padding:16px;flex:1;display:flex;flex-direction:column;gap:7px}
+.dish-name{font-size:0.97rem;font-weight:700;color:var(--navy);line-height:1.3}
+.dish-desc{font-size:0.82rem;color:var(--text-light);line-height:1.5;flex:1}
+.dish-price{display:inline-block;margin-top:8px;background:var(--orange);color:#fff;font-weight:700;font-size:0.97rem;padding:5px 14px;border-radius:20px;align-self:flex-start;transition:background var(--transition),transform var(--transition)}
+.dish-card:hover .dish-price{background:var(--orange-light);transform:translateY(-1px)}
+
+/* SIZE BADGES */
+.size-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.size-badge{display:flex;flex-direction:column;align-items:center;background:var(--navy);border-radius:10px;padding:5px 10px;min-width:60px;transition:background var(--transition),transform var(--transition)}
+.dish-card:hover .size-badge{background:var(--navy-light)}
+.dish-card:hover .size-badge:hover{background:var(--orange);transform:translateY(-2px)}
+.sz{font-size:0.65rem;color:#a8c4e0;text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+.sp{font-size:0.9rem;color:#fff;font-weight:700}
+
+/* DIVIDER */
+.section-divider{border:none;border-top:1px solid #e0e8f0;margin:0}
+
+/* FOOTER */
+footer{background:var(--navy);color:#a8c4e0;padding:48px 20px 32px;margin-top:0}
+.footer-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px}
+.footer-col h4{color:var(--orange);font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;font-weight:700}
+.footer-col p,.footer-col a{font-size:0.88rem;color:#a8c4e0;text-decoration:none;line-height:1.9;display:block}
+.footer-col a:hover{color:var(--orange-light)}
+.footer-col .phone-link{font-size:1.1rem;font-weight:700;color:#fff}
+.social-link{display:flex;align-items:center;gap:8px;transition:color var(--transition)}
+.social-link svg{width:17px;height:17px;fill:var(--orange);flex-shrink:0;transition:transform var(--transition)}
+.social-link:hover svg{transform:scale(1.2)}
+.footer-bottom{text-align:center;margin-top:36px;padding-top:20px;border-top:1px solid #1e3a5c;font-size:0.75rem;color:#5a7a96}
+
+/* Concha, pulpo y calamar desktop: nudge down to show more dish */
+#img-concha-pulpo-calamar{object-position:center 15%}
+/* Camarón orden de 2 desktop: shift down to show more dish */
+#img-camaron-orden-2{object-position:center 85%}
+
+/* Torre desktop: taller container so contain image appears larger */
+#wrap-torre{height:420px}
+/* Capirotadas desktop: taller container to show more of the image */
+#wrap-capirotadas{height:420px}
+
+/* Per-image position/fit helpers */
+.img-top{object-position:center top!important}
+.img-bottom{object-position:center bottom!important}
+.img-contain{object-fit:contain!important;background:var(--navy)!important}
+.img-pos-65{object-position:center 65%!important}
+/* Zoom-out helpers */
+.img-zoom-85{transform:scale(0.85)!important}
+.img-zoom-92{transform:scale(0.92)!important}
+.img-zoom-95{transform:scale(0.95)!important}
+
+@media(max-width:600px){
+  .site-header{padding:36px 20px 30px}
+  .header-inner img{height:150px}
+  .feat-title{font-size:1.2rem;white-space:normal;text-align:center}
+  .feat-grid{grid-template-columns:1fr}
+  .feat-img-wrap{height:260px}
+  .dish-grid{grid-template-columns:1fr}
+  .dish-img-wrap{height:305px}
+  .category-header h2{font-size:1.3rem}
+  .nav-link{padding:10px 14px;font-size:0.72rem}
+  /* Mobile: contain to avoid cropping key subjects */
+  .img-contain-mobile{object-fit:contain!important;background:var(--navy)!important}
+  .img-pos-65{object-position:center top!important}
+  /* Capirotadas mobile: taller container reveals more of the cups */
+  #wrap-capirotadas{height:420px!important}
+  /* Conchas frescas mobile: move crop up */
+  #img-conchas-frescas{object-position:center 30%!important}
+  /* Concha y calamar mobile: zoom in + shift down slightly */
+  #img-concha-calamar{object-position:center 20%!important;transform:scale(1.2)!important}
+  /* Concha, pulpo y calamar mobile: shift down */
+  #img-concha-pulpo-calamar{object-position:center 20%!important}
+  /* Concha, pulpo y camarones mobile: push down to reveal top background */
+  #img-concha-pulpo-camarones{object-position:center 15%!important}
+  /* Súper mixto 4 mariscos mobile: zoom in to crop background, anchor top */
+  #img-super-mixto{transform:scale(1.1)!important}
+  /* Camarón orden de 2 mobile: shift down to show more dish */
+  #img-camaron-orden-2{object-position:center 40%!important}
+  /* Michelada Marisquera mobile: nudge up slightly to show a bit more background */
+  #img-michelada-marisquera{object-position:center 80%!important}
+  /* Torre Marisquera mobile: taller container reveals more of the tower */
+  #wrap-torre{height:420px!important}
+  #img-torre{object-fit:cover!important;object-position:center 20%!important}
+}
+
+@media print{
+  /* Reset colors for print */
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* Hide screen-only elements */
+  .cat-nav,
+  .header-divider,
+  .feat-section::before,
+  .site-header::before{display:none!important}
+
+  /* Page setup */
+  @page{margin:1.8cm 1.5cm;size:A4}
+  body{background:#fff;color:#000;font-size:10pt}
+
+  /* Header */
+  .site-header{background:#fff!important;padding:16px 0 10px;border-bottom:3px solid #e8622a;text-align:center}
+  .header-inner img{height:90px;filter:none}
+  .header-tagline{color:#555;font-size:9pt;letter-spacing:2px;margin-top:4px}
+
+  /* Featured section */
+  .feat-section{background:#fff!important;padding:20px 0 10px;border-bottom:2px solid #c9a84c}
+  .feat-section-inner{max-width:100%}
+  .feat-title{color:#8a6a10;font-size:13pt;letter-spacing:1px}
+  .feat-title-en{color:#888}
+  .feat-title-line{background:#c9a84c}
+  .feat-subtitle{color:#555;font-size:8.5pt;margin-bottom:14px}
+  .feat-subtitle em{color:#777}
+  .feat-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .feat-card{background:#fffdf5!important;border:1.5px solid #c9a84c!important;border-radius:8px;break-inside:avoid;page-break-inside:avoid}
+  .feat-card:hover{transform:none;box-shadow:none}
+  .feat-img-wrap{height:160px}
+  .feat-badge{background:#c9a84c;color:#1a1000;font-size:7pt}
+  .dine-badge{background:#fff0ea;color:#b04010;border:1px solid #e8622a;font-size:7pt}
+  .feat-name{color:#8a6a10;font-size:11pt}
+  .feat-desc{color:#444;font-size:8pt}
+  .feat-price{background:#c9a84c;color:#1a1000;font-size:10pt;padding:4px 12px}
+
+  /* Category sections */
+  .category-section{padding:16px 0 8px;max-width:100%}
+  .category-header{border-left:4px solid #e8622a;padding-left:10px;margin-bottom:14px}
+  .category-header h2{font-size:12pt;color:#0d2240}
+  .cat-en{font-size:8.5pt;color:#666}
+  .section-divider{border-top:1px solid #ddd;margin:8px 0}
+
+  /* Dish grid — 3 columns on A4 */
+  .dish-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+
+  /* Dish cards */
+  .dish-card{box-shadow:none;border:1px solid #ddd;border-radius:6px;break-inside:avoid;page-break-inside:avoid}
+  .dish-card:hover{transform:none;box-shadow:none}
+  .dish-img-wrap{height:120px}
+  .dish-info{padding:8px 10px;gap:4px}
+  .dish-name{font-size:8.5pt;color:#0d2240}
+  .dish-desc{font-size:7.5pt;color:#555}
+  .dish-price{font-size:8.5pt;padding:3px 10px;background:#e8622a;color:#fff}
+  .dish-card:hover .dish-price{transform:none;background:#e8622a}
+
+  /* Size badges */
+  .size-row{gap:4px;margin-top:6px}
+  .size-badge{background:#0d2240;border-radius:6px;padding:3px 7px;min-width:48px}
+  .dish-card:hover .size-badge{background:#0d2240}
+  .sz{font-size:6pt;color:#a8c4e0}
+  .sp{font-size:8pt;color:#fff}
+
+  /* Footer */
+  footer{background:#fff!important;color:#000;padding:16px 0 0;border-top:2px solid #0d2240;margin-top:12px}
+  .footer-col h4{color:#e8622a;font-size:8pt}
+  .footer-col p,.footer-col a{color:#333;font-size:8pt;line-height:1.6}
+  .footer-bottom{color:#666;font-size:7.5pt;border-top:1px solid #ddd;padding-top:10px}
+  .social-link svg{fill:#e8622a}
+
+  /* Force page break before drinks section */
+  #sodas{page-break-before:always;padding-top:20px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <img src="logo.png" alt="El Ancla del Sabor">
+    <div class="header-tagline">Del Mar · Al Paladar</div>
+    <div class="header-divider"></div>
+  </div>
+</header>
+
+<nav class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#especialidades_de_la_casa" class="nav-link nav-feat"><span class="nav-es">⭐ Especialidades</span><span class="nav-en">Chef's Specials</span></a><a href="#entradas__appetizers" class="nav-link"><span class="nav-es">Entradas</span><span class="nav-en">Appetizers</span></a><a href="#ceviches__cocteles" class="nav-link"><span class="nav-es">Ceviches</span><span class="nav-en">Ceviches</span></a><a href="#bandejas_marisqueras" class="nav-link"><span class="nav-es">Bandejas Marisqueras</span><span class="nav-en">Seafood Platters</span></a><a href="#tostadas" class="nav-link"><span class="nav-es">Tostadas</span><span class="nav-en">Tostadas</span></a><a href="#para_compartir" class="nav-link"><span class="nav-es">Para compartir</span><span class="nav-en">To Share</span></a><a href="#sopas" class="nav-link"><span class="nav-es">Sopas</span><span class="nav-en">Soups</span></a><a href="#sodas" class="nav-link"><span class="nav-es">Sodas</span><span class="nav-en">Sodas</span></a><a href="#micheladas" class="nav-link"><span class="nav-es">Micheladas</span><span class="nav-en">Micheladas</span></a><a href="#margaritas" class="nav-link"><span class="nav-es">Margaritas</span><span class="nav-en">Margaritas</span></a><a href="#cocktails" class="nav-link"><span class="nav-es">Cocktails</span><span class="nav-en">Cocktails</span></a><a href="#cervezas" class="nav-link"><span class="nav-es">Cervezas</span><span class="nav-en">Beers</span></a><a href="#vinos" class="nav-link"><span class="nav-es">Vinos</span><span class="nav-en">Wines</span></a><a href="#licores" class="nav-link"><span class="nav-es">Licores</span><span class="nav-en">Spirits</span></a>
+  </div>
+</nav>
+
+<main>
+
+<section id="especialidades_de_la_casa" class="feat-section">
+    <div class="feat-section-inner">
+        <div class="feat-header">
+            <div class="feat-title-line"></div>
+            <h2 class="feat-title">Especialidades de la Casa <span class="feat-title-en">/ Chef's Specials</span></h2>
+            <div class="feat-title-line"></div>
+        </div>
+        <p class="feat-subtitle">Nuestros platos más exclusivos, elaborados con los mejores ingredientes del mar.<br><em>Our most exclusive dishes, crafted with the finest ingredients from the sea.</em></p>
+        <div class="feat-grid">
+        <div class="feat-card">
+            <div class="feat-img-wrap" id="wrap-torre"><img src="photos/Torre_Marisquera.png" alt="Torre Marisquera Mixta" loading="lazy" id="img-torre" class="img-contain" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="feat-badge-row">
+                <span class="feat-badge">⭐ Especialidad de la Casa</span>
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+            </div>
+            <div class="feat-info">
+                <h3 class="feat-name">Torre Marisquera Mixta</h3>
+                <p class="feat-desc">Nuestra especialidad de la casa. Una torre de camarones, pulpo, conchas y mariscos frescos, cuidadosamente apilados con aguacate, tomate, pepino y cebolla morada, bañados en una deliciosa salsa marisquera de la casa.</p>
+                <span class="feat-price">$14</span>
+            </div>
+        </div>
+        <div class="feat-card">
+            <div class="feat-img-wrap" id="wrap-capirotadas"><img src="photos/Capirotadas.png" alt="Capirotadas" loading="lazy" id="img-capirotadas" class="img-pos-65 img-zoom-85" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="feat-badge-row">
+                <span class="feat-badge">⭐ Especialidad de la Casa</span>
+                
+            </div>
+            <div class="feat-info">
+                <h3 class="feat-name">Capirotadas</h3>
+                <p class="feat-desc">Una deliciosa copa escarchada con nuestra mezcla de pulpo, camarón y mariscos frescos, preparada con ingredientes de primera y el inconfundible sabor de nuestra salsa especial de la casa.</p>
+                <span class="feat-price">$12</span>
+            </div>
+        </div></div>
+    </div>
+</section>
+<hr class="section-divider">
+<section id="entradas__appetizers" class="category-section">
+    <div class="category-header">
+        <h2>Entradas / Appetizers <span class="cat-en">/ Appetizers</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Conchas_abiertas_docena.png" alt="Conchas abiertas" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Conchas abiertas</h3>
+                <p class="dish-desc">Una docena de conchas frescas abiertas, servidas con limón y nuestra salsa especial de la casa. Un clásico del mar para disfrutar en su máxima frescura.</p>
+                <span class="dish-price">$7</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tostada_individual_de_camaron.png" alt="Tostada individual de Camarón" loading="lazy" class="img-zoom-85" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Tostada individual de Camarón</h3>
+                <p class="dish-desc">Una tostada de camarón preparada con camarones frescos, aguacate, pepino y cebolla morada, marinados en nuestra salsa especial de la casa. Servida de forma individual para disfrutar todo su sabor.</p>
+                <span class="dish-price">$3</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tostada_individual_de_camaron_y_calamar.png" alt="Tostada individual de Camarón y Calamar" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Tostada individual de Camarón y Calamar</h3>
+                <p class="dish-desc">Una tostada de camarón y calamar, preparada con mariscos frescos, aguacate, pepino y cebolla morada, marinados en nuestra salsa especial de la casa. El equilibrio perfecto entre frescura y sabor.</p>
+                <span class="dish-price">$3</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="ceviches__cocteles" class="category-section">
+    <div class="category-header">
+        <h2>Ceviches / Cócteles <span class="cat-en">/ Ceviches</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Coctel_Concha.png" alt="Conchas frescas" loading="lazy" id="img-conchas-frescas" style="object-position:center 25%;transform:scale(1.12)" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Conchas frescas</h3>
+                <p class="dish-desc">Conchas frescas marinadas en nuestra salsa especial de la casa, acompañadas de cebolla morada, tomate y cilantro para un sabor fresco e irresistible.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Concha_y_Camaron.png" alt="Concha y camarón" loading="lazy" style="object-position:center 10%;transform:scale(1.1)" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Concha y camarón</h3>
+                <p class="dish-desc">Una deliciosa combinación de conchas frescas y camarones, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para una experiencia llena de frescura y sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Camaron_en_ceviche.png" alt="Camarón en ceviche" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón en ceviche</h3>
+                <p class="dish-desc">Camarones frescos marinados en nuestra salsa especial de la casa, acompañados de cebolla morada, tomate y cilantro para un ceviche fresco, ligero y lleno de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Camaron_en_salsa_rosada.png" alt="Camarón en salsa rosada" loading="lazy" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón en salsa rosada</h3>
+                <p class="dish-desc">Camarones frescos bañados en nuestra cremosa salsa rosada, acompañados de cebolla morada, tomate y cilantro para una combinación suave, fresca y llena de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$6</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$12</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$20</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Concha_y_calamar.png" alt="Concha y calamar" loading="lazy" id="img-concha-calamar" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Concha y calamar</h3>
+                <p class="dish-desc">Una exquisita combinación de conchas frescas y calamar, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para un ceviche fresco y lleno de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Concha_y_pulpo.png" alt="Concha y pulpo" loading="lazy" style="object-position:center 20%" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Concha y pulpo</h3>
+                <p class="dish-desc">Una deliciosa combinación de conchas frescas y pulpo, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para un ceviche fresco y lleno de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Camaron_y_pulpo.png" alt="Camarón y pulpo" loading="lazy" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón y pulpo</h3>
+                <p class="dish-desc">Una exquisita combinación de camarones frescos y pulpo, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para un ceviche fresco y lleno de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Calamar_y_pulpo.png" alt="Calamar y pulpo" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Calamar y pulpo</h3>
+                <p class="dish-desc">Una deliciosa combinación de calamar y pulpo, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para un ceviche fresco y lleno de sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Camaron_concha_pulpo.png" alt="Camarón, concha y pulpo" loading="lazy" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón, concha y pulpo</h3>
+                <p class="dish-desc">Una exquisita combinación de camarones frescos, conchas y pulpo, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para una experiencia llena de frescura y sabor.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Aguachile_verde.png" alt="Aguachile Verde" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Aguachile Verde</h3>
+                <p class="dish-desc">Un vibrante aguachile preparado con camarones frescos, aguacate, cebolla morada y nuestra exclusiva salsa de la casa, equilibrando frescura, picante y un sabor inigualable.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Aguachile_Negrito.png" alt="Aguachile Negrito" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Aguachile Negrito</h3>
+                <p class="dish-desc">Camarones frescos marinados en nuestro exclusivo house blend, acompañados de aguacate, pepino y cebolla morada. Un aguachile de sabor intenso y perfectamente equilibrado.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Aguachile_Rojo.png" alt="Aguachile Rojo" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Aguachile Rojo</h3>
+                <p class="dish-desc">Camarones frescos marinados en nuestra exclusiva salsa roja especial, acompañados de aguacate, pepino y cebolla morada. Un clásico que resalta la frescura y el auténtico sabor del mar.</p>
+                <div class="size-row"><span class="size-badge"><span class="sz">8 oz</span><span class="sp">$5</span></span><span class="size-badge"><span class="sz">16 oz</span><span class="sp">$10</span></span><span class="size-badge"><span class="sz">32 oz</span><span class="sp">$18</span></span></div>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Calamar_en_ceviche.png" alt="Calamar en ceviche" loading="lazy" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Calamar en ceviche</h3>
+                <p class="dish-desc">Calamar fresco marinado en nuestra salsa especial de la casa, acompañado de cebolla morada, tomate y cilantro para un ceviche fresco, ligero y lleno de sabor.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Calamar_en_salsa_rosada.png" alt="Calamar en salsa rosada" loading="lazy" style="object-position:center 10%" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Calamar en salsa rosada</h3>
+                <p class="dish-desc">Calamar fresco bañado en nuestra cremosa salsa rosada, acompañado de cebolla morada, tomate y cilantro para una combinación suave, fresca y llena de sabor.</p>
+                <span class="dish-price">$6</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Camaron_y_calamar.png" alt="Camarón y calamar" loading="lazy" style="object-position:center 20%" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón y calamar</h3>
+                <p class="dish-desc">Una deliciosa combinación de camarones frescos y calamar, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para un ceviche fresco y lleno de sabor.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Concha_pulpo_calamar.png" alt="Concha, pulpo y calamar" loading="lazy" id="img-concha-pulpo-calamar" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Concha, pulpo y calamar</h3>
+                <p class="dish-desc">Una exquisita combinación de conchas frescas, pulpo y calamar, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para una experiencia llena de frescura y sabor.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Concha_pulpo_y_camarones.png" alt="Concha, pulpo y camarones" loading="lazy" id="img-concha-pulpo-camarones" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Concha, pulpo y camarones</h3>
+                <p class="dish-desc">Una exquisita combinación de conchas frescas, pulpo y camarones, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para una experiencia llena de frescura y sabor.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Super_Mixto_4_Mariscos.png" alt="Súper mixto 4 mariscos" loading="lazy" id="img-super-mixto" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Súper mixto 4 mariscos</h3>
+                <p class="dish-desc">Nuestra combinación más completa de cuatro mariscos frescos, marinados en nuestra salsa especial de la casa y acompañados de cebolla morada, tomate y cilantro para una explosión de frescura y sabor en cada bocado.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="bandejas_marisqueras" class="category-section">
+    <div class="category-header">
+        <h2>Bandejas Marisqueras <span class="cat-en">/ Seafood Platters</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Bandejas_marisquera_camaron.png" alt="Camarón" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón</h3>
+                <p class="dish-desc">Una deliciosa bandeja de mariscos frescos servida sobre tostadas crujientes, preparada con camarones, bañados en nuestra salsa especial de la casa. Perfecta para compartir y disfrutar de una explosión de sabor.</p>
+                <span class="dish-price">$10</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Bandejas_Marisqueras_camaron_y_pulpo.png" alt="Camarón y Pulpo" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón y Pulpo</h3>
+                <p class="dish-desc">Una deliciosa bandeja de mariscos frescos servida sobre tostadas crujientes, preparada con camarones y pulpo bañados en nuestra salsa especial de la casa. Perfecta para compartir y disfrutar de una explosión de sabor.</p>
+                <span class="dish-price">$10</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Bandejas_Marisqueras_Aguachile_Negro.png" alt="Aguachile Negro" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Aguachile Negro</h3>
+                <p class="dish-desc">Una deliciosa bandeja de mariscos frescos servida sobre tostadas crujientes, preparada con camarones cilantro, limón, chile, pepino y aguacate  y salsa de la casa.</p>
+                <span class="dish-price">$10</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Bandejas_Marisquera_camaron_y_calamar.png" alt="Camarón y Calamar" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón y Calamar</h3>
+                <p class="dish-desc">Una deliciosa bandeja de mariscos frescos servida sobre tostadas crujientes, preparada con Camarones y Calamar cilantro, limón, chile, pepino y aguacate  y salsa de la casa.</p>
+                <span class="dish-price">$14</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Bandejas_Marisquera_Aguachile_verde.png" alt="Aguachile Verde" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Aguachile Verde</h3>
+                <p class="dish-desc">Una deliciosa bandeja de mariscos frescos servida sobre tostadas crujientes, preparada con pulpo bañados en nuestra salsa especial de la casa. Perfecta para compartir y disfrutar de una explosión de sabor.</p>
+                <span class="dish-price">$10</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="tostadas" class="category-section">
+    <div class="category-header">
+        <h2>Tostadas <span class="cat-en">/ Tostadas</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tostadas_Camaron_orden_de_2.png" alt="Camarón orden de 2" loading="lazy" id="img-camaron-orden-2" class="img-top" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Camarón orden de 2</h3>
+                <p class="dish-desc">Dos tostadas de camarón preparadas con camarones frescos, aguacate, pepino y cebolla morada, marinados en nuestra salsa especial de la casa. Una porción perfecta para disfrutar y compartir.</p>
+                <span class="dish-price">$6</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tostadas_camaron_y_calamar_orden_de_2.png" alt="Mixta de Camarón Y Calamar Orden de 2" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Mixta de Camarón Y Calamar Orden de 2</h3>
+                <p class="dish-desc">Dos tostadas mixtas de camarón y calamar, preparadas con mariscos frescos, aguacate, pepino y cebolla morada, marinados en nuestra salsa especial de la casa. Una combinación perfecta de frescura y sabor.</p>
+                <span class="dish-price">$6</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tostadas_Mar_y_Tierra.png" alt="Mar y Tierra" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Mar y Tierra</h3>
+                <p class="dish-desc">Tres tostadas Mar y Tierra sobre una cama de guacamole fresco, coronadas con jugosos camarones y tiernos cortes de res. Acompañadas de salsa verde y limón para una combinación que une lo mejor del mar y tierra.</p>
+                <span class="dish-price">$12</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="para_compartir" class="category-section">
+    <div class="category-header">
+        <h2>Para compartir <span class="cat-en">/ To Share</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Charola_Marisquera.png" alt="Charola Marisquera" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Charola Marisquera</h3>
+                <p class="dish-desc">4 Libras de mariscos una espectacular bandeja para compartir con una selección de camarones, pulpo, conchas y mariscos frescos, acompañados de limón, vegetales frescos y nuestros exclusivos cócteles preparados con la receta especial de la casa. Ideal para disfrutar en buena compañía.</p>
+                <span class="dish-price">$38</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="sopas" class="category-section">
+    <div class="category-header">
+        <h2>Sopas <span class="cat-en">/ Soups</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Sopa_Marinera.png" alt="Sopa Marinera" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Sopa Marinera</h3>
+                <p class="dish-desc">Una reconfortante sopa marinera preparada con una exquisita selección de camarón, pescado, cangrejo, mejillones y almejas, realzada con vegetales frescos y el auténtico sabor del mar en cada cucharada.</p>
+                <span class="dish-price">$10</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="sodas" class="category-section">
+    <div class="category-header">
+        <h2>Sodas <span class="cat-en">/ Sodas</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/sodas.png" alt="Sodas" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Sodas</h3>
+                <p class="dish-desc">Salutaris Agua Mineral, Coca-Cola, Tropical Uva, Fanta Naranja y Agua.</p>
+                <span class="dish-price">$1</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="micheladas" class="category-section">
+    <div class="category-header">
+        <h2>Micheladas <span class="cat-en">/ Micheladas</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Shotsito_Marisquero.png" alt="Shotsito Marisquero" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Shotsito Marisquero</h3>
+                <p class="dish-desc">Concha fresca y camarón servidos con Clamato y nuestra exclusiva salsa de la casa, acompañados de limón para una explosión de sabor en cada shot.</p>
+                <span class="dish-price">$1.50</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Mineralada_del_Ancla.png" alt="Mineralada del Ancla" loading="lazy" style="object-position:center 15%" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Mineralada del Ancla</h3>
+                <p class="dish-desc">Agua mineral preparada con Clamato, limón, salsas especiales y especias, servida bien fría para una bebida refrescante y llena de sabor.</p>
+                <span class="dish-price">$4</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Michelada_Marisquera.png" alt="Michelada Marisquera" loading="lazy" id="img-michelada-marisquera" class="img-bottom" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Michelada Marisquera</h3>
+                <p class="dish-desc">Cerveza bien fría preparada con Clamato y nuestra exclusiva salsa de la casa, escarchada con chile y acompañada de camarones frescos y limón. Una combinación perfecta para disfrutar.</p>
+                <span class="dish-price">$6</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Michelada_con_Clamato.png" alt="Michelada con Clamato" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Michelada con Clamato</h3>
+                <p class="dish-desc">Una refrescante mezcla de cerveza bien fría con Clamato, limón, salsas y especias, servida con el borde escarchado para un sabor intenso y perfecto para acompañar tus mariscos favoritos.</p>
+                <span class="dish-price">$4.50</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="margaritas" class="category-section">
+    <div class="category-header">
+        <h2>Margaritas <span class="cat-en">/ Margaritas</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Margarita_de_limon_o_de_fresa.png" alt="Margarita de limon o de fresa" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Margarita de limon o de fresa</h3>
+                <p class="dish-desc">Refrescante cóctel preparado con tequila, jugo de limón y servido con escarchado de tajín. Disponible en sabor tradicional de limón o fresa, perfecto para disfrutar en cualquier ocasión.</p>
+                <span class="dish-price">$4</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="cocktails" class="category-section">
+    <div class="category-header">
+        <h2>Cocktails <span class="cat-en">/ Cocktails</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Long_Island_Iced_Tea.png" alt="Long Island Iced Tea" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Long Island Iced Tea</h3>
+                <p class="dish-desc">El clásico cóctel que combina vodka, ron, ginebra, tequila y triple sec, equilibrado con un toque de limón y cola para un sabor intenso, refrescante e inolvidable.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="cervezas" class="category-section">
+    <div class="category-header">
+        <h2>Cervezas <span class="cat-en">/ Beers</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Smirnoff_Ice.png" alt="Smirnoff Ice" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Smirnoff Ice</h3>
+                <p class="dish-desc">Smirnoff Ice Variedad, Cubata, Spirit Mojito.</p>
+                <span class="dish-price">$2.50</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Cerveza_Nacional.png" alt="Cerveza Nacional" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Cerveza Nacional</h3>
+                <p class="dish-desc">Pilsner, Golden,Regia, Suprema.</p>
+                <span class="dish-price">$1.50</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Cerveza_Lata_Tacon_Alto.png" alt="Lata Tacón Alto" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Lata Tacón Alto</h3>
+                <p class="dish-desc">Regia, Pilsner, Golden.</p>
+                <span class="dish-price">$2</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Cerveza_Extranjera.png" alt="Cerveza Extranjera" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Cerveza Extranjera</h3>
+                <p class="dish-desc">Michelob, Corona Extra.</p>
+                <span class="dish-price">$2.25</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="vinos" class="category-section">
+    <div class="category-header">
+        <h2>Vinos <span class="cat-en">/ Wines</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Vinos_Merlot.png" alt="Merlot" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                
+                <h3 class="dish-name">Merlot</h3>
+                <p class="dish-desc">Una copa de vino Merlot.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Champagne_Rose.png" alt="Champagne Rose" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Champagne Rose</h3>
+                <p class="dish-desc">Una Copa de Champagne Rose.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+<section id="licores" class="category-section">
+    <div class="category-header">
+        <h2>Licores <span class="cat-en">/ Spirits</span></h2>
+    </div>
+    <div class="dish-grid">
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Ron_Barcelo.png" alt="Ron Barcelo" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Ron Barcelo</h3>
+                <p class="dish-desc">Un shot de Barcelo incluye soda o solo en las rocas.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Tequila_El_Santo.png" alt="Tequila El Santo" loading="lazy" class="img-bottom" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Tequila El Santo</h3>
+                <p class="dish-desc">Un shot de tequila El Santo.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Jose_Cuervo.png" alt="Tequila Jose Cuervo" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Tequila Jose Cuervo</h3>
+                <p class="dish-desc">Un Shot de tequila Jose Cuervo.</p>
+                <span class="dish-price">$4</span>
+            </div>
+        </div>
+        <div class="dish-card">
+            <div class="dish-img-wrap"><img src="photos/Flor_de_Cana.png" alt="Flor de Caña" loading="lazy" onerror="this.parentElement.classList.add('no-img')"></div>
+            <div class="dish-info">
+                <span class="dine-badge">Solo en Mesa / Dine In Only</span>
+                <h3 class="dish-name">Flor de Caña</h3>
+                <p class="dish-desc">Un trago de Flor de Caña precio incluye Coca-Cola o en las rocas si prefiere.</p>
+                <span class="dish-price">$5</span>
+            </div>
+        </div></div>
+</section>
+<hr class="section-divider">
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Contacto / Contact</h4>
+      <a class="phone-link" href="tel:+50370953554">📱 7095-3554</a>
+      <a href="https://maps.app.goo.gl/k9eAwPRHhPMtN634A" target="_blank" rel="noopener">📍 Ver en Google Maps</a>
+    </div>
+    <div class="footer-col">
+      <h4>Dirección / Address</h4>
+      <p>Avenida Campos Verdes<br>Lourdes, Colón, La Libertad<br>El Salvador 1512</p>
+    </div>
+    <div class="footer-col">
+      <h4>Síguenos / Follow Us</h4>
+      <a class="social-link" href="https://www.facebook.com/el.ancla.del.sabor.2024" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a class="social-link" href="https://www.tiktok.com/@elancladelsabor" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+        TikTok
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Cócteles El Ancla del Sabor · Lourdes, Colón, La Libertad, El Salvador · Todos los derechos reservados
+  </div>
+</footer>
+
+</body>
+</html>
